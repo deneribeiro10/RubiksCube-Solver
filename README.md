@@ -21,7 +21,7 @@ computacional nem sempre segue os mesmos principios da vida real. Não estou
 dizendo que não é possivel relver o cubo utilizando tal metodo, mas sim que não
 é uma boa escolha.
     
-## VISUALIZAÇÃO POR FACES
+## Visualização das faces
 ```
                     **********************
                     *      *      *      *
