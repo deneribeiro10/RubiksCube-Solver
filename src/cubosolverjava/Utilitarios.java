@@ -17,71 +17,42 @@ public class Utilitarios {
         definindo os 6 centros
         0 a 5
     */
-    byte U = 0;
-    byte F = 1;
-    byte L = 2;
-    byte R = 3;
-    byte B = 4;
-    byte D = 5;
+    static final byte U = 0;
+    static final byte F = 1;
+    static final byte L = 2;
+    static final byte R = 3;
+    static final byte B = 4;
+    static final byte D = 5;
     
-    /*
-        definindo as 8 quinas
-        0 a 7
-    */
-    byte URF = 0;
-    byte UFL = 1;
-    byte ULB = 2;
-    byte UBR = 3;
-    byte DFR = 4;
-    byte DLF = 5;
-    byte DBL = 6;
-    byte DRB = 7;
-    
-    /*
-        definindo os 12 meios
-        0 a 11
-    */
-    byte UF = 0;
-    byte UL = 1;
-    byte UB = 2;
-    byte UR = 3;
-    byte DF = 4;
-    byte DL = 5;
-    byte DB = 6;
-    byte DR = 7;
-    byte FR = 8;
-    byte FL = 9;
-    byte BL = 10;
-    byte BR = 11;
     
     /*
         Definindo os 18 movimentos
     */
-    byte Ux1 = 0x0;
-    byte Ux2 = 0x1;
-    byte Ux3 = 0x2;
-    byte Fx1 = 0x3;
-    byte Fx2 = 0x4;
-    byte Fx3 = 0x5;
-    byte Lx1 = 0x6;
-    byte Lx2 = 0x7;
-    byte Lx3 = 0x8;
-    byte Rx1 = 0x9;
-    byte Rx2 = 0xA;
-    byte Rx3 = 0xB;
-    byte Bx1 = 0xC;
-    byte Bx2 = 0xD;
-    byte Bx3 = 0xE;
-    byte Dx1 = 0xF;
-    byte Dx2 = 0x10;
-    byte Dx3 = 0x11;
+    static final byte Ux1 = 0x0;
+    static final byte Ux2 = 0x1;
+    static final byte Ux3 = 0x2;
+    static final byte Fx1 = 0x3;
+    static final byte Fx2 = 0x4;
+    static final byte Fx3 = 0x5;
+    static final byte Lx1 = 0x6;
+    static final byte Lx2 = 0x7;
+    static final byte Lx3 = 0x8;
+    static final byte Rx1 = 0x9;
+    static final byte Rx2 = 0xA;
+    static final byte Rx3 = 0xB;
+    static final byte Bx1 = 0xC;
+    static final byte Bx2 = 0xD;
+    static final byte Bx3 = 0xE;
+    static final byte Dx1 = 0xF;
+    static final byte Dx2 = 0x10;
+    static final byte Dx3 = 0x11;
     
     public final String[] movimentosString 
             = {"U ", "U2", "U'", "F ", "F2", "F'", "L ", "L2", "L'",
                "R ", "R2", "R'", "B ", "B2", "B'", "D ", "D2", "D'"};
     
     public void adicionaMovimentos(String s, byte move) {
-        s += this.movimentosString[(int)move] + ",";
+        s += this.movimentosString[move] + ",";
     }
     
     static int calculaFatorial(int n) {
@@ -165,5 +136,6 @@ public class Utilitarios {
         
         return valor;
     }
-    
+       
 }
+

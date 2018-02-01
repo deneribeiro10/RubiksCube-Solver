@@ -5,8 +5,6 @@
  */
 package cubosolverjava;
 
-import java.util.Arrays;
-
 /**
  *
  * @author Dener
@@ -29,6 +27,6 @@ public class CuboSolverJava {
             valor = Utilitarios.arrayParaValorOri(quinas, false);
             System.out.println(valor);
         }
-              
+                    
     }
 }

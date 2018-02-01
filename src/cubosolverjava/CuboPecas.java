@@ -34,8 +34,8 @@ public class CuboPecas {
         - todas as orientacoes = 0
         - valor da peça = indice do array
     */
-    byte quinas[] = {0, 1, 2, 3, 4, 5, 6, 7};
-    byte meios[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
+    private byte quinas[];
+    private byte meios[];
     
     /*
         array com os 18 possiveis movimentos 
@@ -51,22 +51,37 @@ public class CuboPecas {
         this.setOriMeios(oriMeios);
     }
     
+    public CuboPecas(CuboPecas cp) {
+        this.copiaCubos(cp);
+    }
+    
     public CuboPecas() {
         
     }
     
     /*
-    for i = 1, 8 do
-    pQuinas[i] = e1.pQuinas[e2.pQuinas[i]] 
-    oQuinas[i] = (e1.oQuinas[e2.pQuinas[i]] + e2.oQuinas[i]) % 3
+        copia cubos
     */
+    public void copiaCubos(CuboPecas de) {
+        byte[] quina = new byte[8];
+        byte[] meio = new byte[12];
+        de.getArrayMeios(meio);
+        de.getArrayQuinas(quina);
+        
+        this.setArrayMeios(meio);
+        this.setArrayQuinas(quina);
+    }
     
+    /*
+        multiplicacao de cubos, significa sair de um estado e ir para outro a partir de 
+        um movimento realizado sobre o cubo
+    */   
     static void multQuinas(CuboPecas base, CuboPecas estado, CuboPecas resultado) {
         int oriEstado;
         int oriBase;
         int oriResultado;
         int indice;
-        for(int i = 0; i < 8; i++) { 
+        for(int i = CuboPecas.URF; i <= CuboPecas.DFR; i++) { 
             indice = base.quinas[i] & 0xF;
             // limpa
             resultado.quinas[i] &= 0;
@@ -86,7 +101,7 @@ public class CuboPecas {
         int oriBase;
         int oriResultado;
         int indice;
-        for(int i = 0; i < 12; i++) {
+        for(int i = CuboPecas.UR ; i <= CuboPecas.BR; i++) {
             indice = base.meios[i] & 0xF;
             // limpa
             resultado.meios[i] &= 0;
@@ -106,20 +121,18 @@ public class CuboPecas {
         CuboPecas.multMeios(base, estado, resultado);
     }
     
+    
+    /*
+        inicializa os movimentos 
+    */
     static void inicializaMovimentos() {
-        /*CuboPecas MovimentoU = new CuboPecas(15120, 0, 119750400, 0);
-        CuboPecas MovimentoF = new CuboPecas(8064, 412, 29441808, 802);
-        CuboPecas MovimentoL = new CuboPecas(1230, 1236, 2949660, 0);
-        CuboPecas MovimentoR = new CuboPecas(21021, 110, 323403417, 0);
-        CuboPecas MovimentoB = new CuboPecas(224, 1521, 328552, 1160);
-        CuboPecas MovimentoD = new CuboPecas(9, 0, 5880, 0);*/
-        
-        CuboPecas.movimentos[0] = new CuboPecas(15120, 0, 119750400, 0);
-        CuboPecas.movimentos[3] = new CuboPecas(8064, 412, 29441808, 802);
-        CuboPecas.movimentos[6] = new CuboPecas(1230, 1236, 2949660, 0);
-        CuboPecas.movimentos[9] = new CuboPecas(21021, 110, 323403417, 0);
-        CuboPecas.movimentos[12] = new CuboPecas(224, 1521, 328552, 1160);
-        CuboPecas.movimentos[15] = new CuboPecas(9, 0, 5880, 0);
+               
+        CuboPecas.movimentos[0] = new CuboPecas(15120, 0, 119750400, 0);    // U
+        CuboPecas.movimentos[3] = new CuboPecas(8064, 412, 29441808, 802);  // F
+        CuboPecas.movimentos[6] = new CuboPecas(1230, 1236, 2949660, 0);    // L
+        CuboPecas.movimentos[9] = new CuboPecas(21021, 110, 323403417, 0);  // R
+        CuboPecas.movimentos[12] = new CuboPecas(224, 1521, 328552, 1160);  // B
+        CuboPecas.movimentos[15] = new CuboPecas(9, 0, 5880, 0);            // D
         
         for(int i = 0; i < 18; i+=3) {
             for(int j = 0; j < 2; j++) {
@@ -150,6 +163,14 @@ public class CuboPecas {
         Utilitarios.valorOriParaArray(this.meios, oriMeios, true);
     }
     
+    public void setArrayQuinas(byte[] arr) {
+        System.arraycopy(arr, 0, this.quinas, 0, 8);
+    }
+    
+    public void setArrayMeios(byte[] arr) {
+        System.arraycopy(arr, 0, this.meios, 0, 12);
+    }
+    
     /* Getters */
     
     public int getPermQuinas() {
@@ -175,4 +196,39 @@ public class CuboPecas {
     public void getArrayMeios(byte[] arr0) {
         System.arraycopy(this.meios, 0, arr0, 0, 12);
     }
+    
+    
+    
+    /*
+        Declaraçao de todas as pecas
+    */
+    /*
+        definindo as 8 quinas
+        0 a 7
+    */
+    static final byte URF = 0;
+    static final byte UFL = 1;
+    static final byte ULB = 2;
+    static final byte UBR = 3;
+    static final byte DFR = 4;
+    static final byte DLF = 5;
+    static final byte DBL = 6;
+    static final byte DRB = 7;
+    
+    /*
+        definindo os 12 meios
+        0 a 11
+    */
+    static final byte UR = 0;
+    static final byte UF = 1;
+    static final byte UL = 2;
+    static final byte UB = 3;
+    static final byte DR = 4;
+    static final byte DF = 5;
+    static final byte DL = 6;
+    static final byte DB = 7;
+    static final byte FR = 8;
+    static final byte FL = 9;
+    static final byte BL = 10;
+    static final byte BR = 11;
 }
